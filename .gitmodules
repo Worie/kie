@@ -1,0 +1,18 @@
+[submodule "backend"]
+	path = backend
+	url = git@github.com:Worie/kie-node.git
+[submodule "example-content"]
+	path = example-content
+	url = git@github.com:Worie/kie-example-content.git
+[submodule "static-builder"]
+	path = static-builder
+	url = git@github.com:Worie/kie-static-builder.git
+[submodule "common"]
+	path = common
+	url = git@github.com:Worie/kie-common.git
+[submodule "front"]
+	path = front
+	url = git@github.com:Worie/kie-front.git
+[submodule "lang"]
+	path = lang
+	url = git@github.com:Worie/kie-lang.git

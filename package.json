@@ -1,0 +1,39 @@
+{
+  "name": "kie",
+  "version": "0.0.2",
+  "description": "",
+  "main": "bin/index.js",
+  "config": {
+    "content_path": "kie-example-content",
+    "template_path": "./kie-template.pug",
+    "assets_path": "../front/dist/",
+    "destination_path": "../backend/dist/",
+    "server_port": 65500,
+    "bsync_port": 65501,
+    "bsync_ui_port": 65502
+  },
+  "scripts": {
+    "build-assets": "cd front && node gulpfile.js --run=build:all && cd ../ && npm run build-content",
+    "watch-assets": "onchange \"front/src/**/*\" -- npm run build-assets",
+    "build-content": "cd static-builder && node bin/app.js --contentPath=$npm_package_config_content_path --templatePath=$npm_package_config_template_path --assetsPath=$npm_package_config_assets_path --destinationPath=$npm_package_config_destination_path",
+    "watch-content-dev": "onchange \"static-builder/kie-example-content/**/*\" -- npm run build-content",
+    "watch-content-prod": "onchange \"$npm_package_config_content_path/**/*\" -- npm run build-content",
+    "backend": "cd backend && node server",
+    "sync": "browser-sync start --proxy \"localhost:$npm_package_config_server_port\" --files \"backend/dist/**/*\" --ui-port $npm_package_config_bsync_ui_port --port $npm_package_config_bsync_port --no-notify",
+    "dev": "npm-run-all -p -r backend watch-content-dev watch-assets sync",
+    "prod": "npm-run-all -p -r backend watch-content-prod watch-assets sync",
+    "init": "cd backend && npm install && cd ../front && npm install && cd ../static-builder  && npm install && cd .. && npm-run-all build-assets build-content > /dev/null"
+  },
+  "author": "Wojciech Połowniak",
+  "license": "MPL 2.0",
+  "dependencies": {
+    "browser-sync": "^2.23.6",
+    "cross-var": "^1.1.0",
+    "npm-run-all": "^4.1.2",
+    "onchange": "^3.3.0",
+    "yargs": "^11.0.0"
+  },
+  "bin": {
+    "kie": "bin/index.js"
+  }
+}
