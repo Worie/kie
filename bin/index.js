@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-const { execSync, spawn } = require( 'child_process');
+const { execSync, spawn } = require('child_process');
+const { getInstalledPathSync } = require('get-installed-path')
 const { argv } = require('yargs');
 
 Object.keys(argv).filter(arg => {
@@ -14,26 +15,22 @@ Object.keys(argv).filter(arg => {
   execSync(`npm config set kie:${arg} ${argv[arg]}`);
 });
 
-const child = spawn('npm', ['run', 'prod']);
+let installPath;
+
+try {
+  installPath = getInstalledPathSync('kie');
+} catch (err) {
+  console.error(err);
+}
+
+const child = spawn('npm', ['run', 'prod'], {
+  cwd: installPath,
+});
 
 child.stdout.setEncoding('utf8');
+
 child.stdout.on('data', (chunk) => {
   if (chunk.includes('Server running at')) {
     process.stdout.write(chunk);
   }
 });
-
-//const updateEnv => ()
-//
-//exec('npm', (err, stdout, stderr) => {
-//  if (err) {
-//    // node couldn't execute the command
-//    return;
-//  }
-//
-//  // the *entire* stdout and stderr (buffered)
-//  console.log(`stdout: ${stdout}`);
-//  console.log(`stderr: ${stderr}`);
-//});
-//
-//"echo \"$npm_package_config_foo\" && npm config set kie:foo "

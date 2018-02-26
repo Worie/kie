@@ -1,7 +1,7 @@
 {
   "name": "kie",
-  "version": "0.0.2",
-  "description": "",
+  "version": "0.0.6",
+  "description": "A tool for creating amazing, customizable front-end tutorials with ease",
   "main": "bin/index.js",
   "config": {
     "content_path": "kie-example-content",
@@ -15,20 +15,22 @@
   "scripts": {
     "build-assets": "cd front && node gulpfile.js --run=build:all && cd ../ && npm run build-content",
     "watch-assets": "onchange \"front/src/**/*\" -- npm run build-assets",
-    "build-content": "cd static-builder && node bin/app.js --contentPath=$npm_package_config_content_path --templatePath=$npm_package_config_template_path --assetsPath=$npm_package_config_assets_path --destinationPath=$npm_package_config_destination_path",
+    "build-content": "cd static-builder && node bin/app.js --contentPath=$npm_package_config_content_path --templatePath=$npm_package_config_template_path --assetsPath=$npm_package_config_assets_path --destinationPath=$npm_package_config_destination_path; node bin/app.js --contentPath=$npm_package_config_content_path --templatePath=$npm_package_config_template_path --assetsPath=$npm_package_config_assets_path --destinationPath=../backend/dist/",
     "watch-content-dev": "onchange \"static-builder/kie-example-content/**/*\" -- npm run build-content",
     "watch-content-prod": "onchange \"$npm_package_config_content_path/**/*\" -- npm run build-content",
     "backend": "cd backend && node server",
     "sync": "browser-sync start --proxy \"localhost:$npm_package_config_server_port\" --files \"backend/dist/**/*\" --ui-port $npm_package_config_bsync_ui_port --port $npm_package_config_bsync_port --no-notify",
     "dev": "npm-run-all -p -r backend watch-content-dev watch-assets sync",
     "prod": "npm-run-all -p -r backend watch-content-prod watch-assets sync",
-    "init": "cd backend && npm install && cd ../front && npm install && cd ../static-builder  && npm install && cd .. && npm-run-all build-assets build-content > /dev/null"
+    "install": "cd backend && npm install && cd ../front && npm install && cd ../static-builder  && npm install",
+    "postinstall": "npm-run-all build-assets > /dev/null"
   },
   "author": "Wojciech Połowniak",
-  "license": "MPL 2.0",
+  "license": "MPL2.0",
   "dependencies": {
     "browser-sync": "^2.23.6",
     "cross-var": "^1.1.0",
+    "get-installed-path": "^4.0.8",
     "npm-run-all": "^4.1.2",
     "onchange": "^3.3.0",
     "yargs": "^11.0.0"

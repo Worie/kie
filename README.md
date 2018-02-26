@@ -1,10 +1,8 @@
-# kie ![npm tag]()
+# kie ![npm tag](https://badge.fury.io/js/kie.svg)
 > A tool for creating amazing, customizable front-end tutorials with ease
 
-<p align="center">
-  <img src=""
-  alt="KIE - Koduje interactive ebook">
-</p>
+# Important notice! 
+This is an alfa version of the package. It may not work as expected without minor tweaks just yet. Sorry for the inconvinience!
 
 # Introduction
 
@@ -15,7 +13,6 @@ KIE is and acronym for Koduje's Interactive E-book - which was originally create
 It's goal was to provide an interactive form of learning-by-doing combined with ability to watch a video tutorial and seeing the preview of the code at glance - and It's goal hasn't changed. 
 
 The only thing that chagned is that now the KIE is an Open Source Project and anyone can use it to provide this kind of content to their audience
-
 
 ## Example 
 
@@ -82,6 +79,8 @@ You can start development of your own tutorial by passing a `contentPath` argume
 $ kie --contentPath="/absolute/path/to/your/content"
 ```
 
+
+
 There are also other `npm variables` that you can override with custom parameters passed to `kie`. 
 See `package.json` for available options for now.
 
@@ -104,38 +103,57 @@ Those can be later linked to tutorials ([kie-tutorials](https://github.com/Worie
 
 # Contributing 
 
-Contributions are always welcome! 
+PRs are always welcome! 
 
 There are no tests written at this point - feel free to start!
 
-We're using [this](#) Trello board for managing the issues, their importance and related topics.
+We're using [this](https://trello.com/b/TG6RRukj/dev-interactive-ebook) Trello board for managing the issues, their importance and related topics.
 
 ## Submodules
 This package consists a few modules (further modularization is probable in the future). Those are probably insteresting for people who are willing to help with development of KIE project.
 
-* [kie-example-content](https://github.com/Worie/kie-example-content) - contains an example content for KIE project 
-* [kie-creator](https://github.com/Worie/kie-creator) - [Brackets](https://github.com/adobre/brackets) extension for creating custom exercises
+* [kie](https://github.com/Worie/kie) - a binder for all submodules. Builds front, copies it to backend and runs browser-sync. Watches content directory for changes and runs static-builder to update the contents. 
+* [kie-example-content](https://github.com/Worie/kie-example-content) - contains an example content for KIE project, built by [kie-creator](https://github.com/Worie/kie-creator)
+* [kie-creator](https://github.com/Worie/kie-creator) - [Brackets](https://github.com/adobe/brackets) extension for creating custom exercises
 * [kie-front](https://github.com/Worie/kie-front) - Module related to front-end stuff - such as displaying the panes, live preview in the browser etc.
-* [kie-backend](https://github.com/Worie/kie-backend) - Module that's hosting the static files during development, as well as serving the API for [kie-front]().
-* [kie-lang](https://github.com/Worie/kie-lang) - package containing custom markup language that can be used when developing new tutorials. _(ultimately, we'd like to fork something like [showdown]() instead of developing it completely from scratch)_
+* [kie-backend](https://github.com/Worie/kie-backend) - Module that's hosting the static files during development, as well as serving the API for [kie-front](https://github.com/Worie/kie-front).
+* [kie-lang](https://github.com/Worie/kie-lang) - package containing custom markup language that can be used when developing new tutorials. _(ultimately, we'd like to fork something like [showdown](https://github.com/showdownjs/showdown) instead of developing it completely from scratch)_
 * [kie-common](https://github.com/Worie/kie-common) - common files for submodules 
-* [kie-static-builder](https://github.com/Worie/kie-static-builder) - builds the static files basing on [kie-front]() and [kie-example-content]() modules (or your custom content)
+* [kie-static-builder](https://github.com/Worie/kie-static-builder) - builds the static files basing on [kie-front](https://github.com/Worie/kie-front) and [kie-example-content](https://github.com/Worie/kie-example-content) modules (or your custom content)
 * [kie-editor](https://github.com/Worie/kie-editor) - that's where editor for the snippets is going to be stored once it's extracted from [kie-front](https://github.com/Worie/kie-front) submodule
+* [kie-creator](https://github.com/Worie/kie-creator) - Brackets extension for creating the contents of your tutorials
 * [kie-tutorials](https://github.com/Worie/kie-tutorials) - place where you can store your tutorials
 
-Those are separate repos to provide the ability to develop all of them in pararel and easier maintainance. 
 
-## Donation / partnership
+Those are separate repos to provide the ability to develop all of them in pararel and easier maintainance (perhaps)
 
-In general, we are open for donations and partnership. 
+## Todo list: 
 
-All funds that'll eventually be donated for the project will be spend for public api server that can host the Koduje project main website, paying for the domain name.
+There's _a little_ technical debt in the initial stage of the project. For now, my vision of the project consists of:
+
+- [ ] kie 
+    - [ ] Clean up npm scripts (!)
+    - [ ] Fix browsersync
+    - [ ] Rebrand to devebook
+- [ ] kie-front
+    - [ ] Refactor to [Vue.js](https://vuejs.org)
+    - [ ] Webpack, TS, Vuex
+    - [ ] Use [Carbon Design System](http://carbondesignsystem.com) for main components
+    - [ ] [Redesign UI](https://shrtm.nu/6XfE)
+- [ ] kie-creator 
+    - [ ] rewrite to use async/await (!)
+- [ ] kie-node 
+- [ ] kie-example-content
+
+And lots of minor features, improvements once above is done.
+
+You can track [Trello](https://trello.com/b/TG6RRukj/dev-interactive-ebook) for more details.
 
 # Author's notes
 
 Enourmous thanks to Damian Wielgosik for forming the overall [Koduje](http://kodu.je) project, ignition of the original KIE idea and initial funding of the project.
 
-Big thanks to Jarosław Rencz for implementing the PoC of core functionality and to all of [Functionite](http://functionite.com) crew for overall support.
+Big thanks to Jarosław Rencz for implementing the initial PoC of core functionality and to all of [Functionite](http://functionite.com) crew for overall support in the early stages of development.
 
 Big thanks to Jerzy Górski for beautiful graphics and animations made for Koduje project.
 
